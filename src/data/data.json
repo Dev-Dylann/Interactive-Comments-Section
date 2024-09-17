@@ -46,7 +46,8 @@
               "webp": "/avatars/ramsesmiron.webp"
             },
             "username": "ramsesmiron"
-          }
+          },
+          "replies": []
         },
         {
           "id": 4,
@@ -60,7 +61,8 @@
               "webp": "/avatars/juliusomo.webp"
             },
             "username": "juliusomo"
-          }
+          },
+          "replies": []
         }
       ]
     }

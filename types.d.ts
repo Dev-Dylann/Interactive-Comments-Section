@@ -19,6 +19,6 @@ type FullComment = {
         };
         username: string;
     };
-    replies?: FullComment[],
+    replies: FullComment[],
     replyingTo?: number
 }

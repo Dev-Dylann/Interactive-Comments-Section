@@ -10,6 +10,7 @@ import ReplySection from "./ReplySection"
 import dateFormatter from "../utils/dateFormatter"
 import { deleteComment, editComment } from "../utils/commentUtils"
 import { useState } from "react"
+import ReplyInput from "./ReplyInput"
 
 type Props = {
     comment: FullComment
@@ -19,7 +20,7 @@ function Comment({ comment }: Props) {
 
     const [isEditing, setIsEditing] = useState(false)
     const [userComment, setUserComment] = useState(comment.content)
-    const [isReplying, setIsReplying] = useState(false)
+    const [isReplying, setIsReplying] = useState(0)
     const userCommentRef = useRef<HTMLTextAreaElement>(null)
 
     const { user, setComments } = useDataContext()
@@ -117,7 +118,7 @@ function Comment({ comment }: Props) {
                                 )}
                             </>
                         ) : (
-                            <button className="text-modBlue font-bold flex items-center gap-2">
+                            <button onClick={() => setIsReplying(comment.id)} className="text-modBlue font-bold flex items-center gap-2">
                                 <img src={replyIcon} alt="Reply Icon" />
                                 Reply
                             </button>
@@ -128,6 +129,9 @@ function Comment({ comment }: Props) {
 
             {/* Reply Section */}
             {comment.replies?.length !== 0 && <ReplySection replies={comment.replies!} />}
+
+            {/* Input field to make replies */}
+            {isReplying > 0 && <ReplyInput setIsReplying={setIsReplying} replyingComment={comment} />}
         </>
 
     )

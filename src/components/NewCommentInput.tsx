@@ -4,7 +4,7 @@ import { createNewComment } from "../utils/commentUtils"
 
 function NewCommentInput() {
 
-    const { user, comments, setComments } = useDataContext()
+    const { user, comments, setComments, lastId } = useDataContext()
 
     const [commentContent, setCommentContent] = useState('')
 
@@ -21,9 +21,10 @@ function NewCommentInput() {
             <img src={user.image.png} alt={user.username} className='h-10 w-10 mr-3' width={64} height={64} />
 
             <button
+                disabled={commentContent.trim() === ''}
                 type="submit"
-                className='w-fit place-self-end bg-modBlue text-white font-bold px-4 py-2 rounded-lg'
-                onClick={() => createNewComment(user, commentContent, comments.length + 1, setComments)}>
+                className='w-fit place-self-end bg-modBlue text-white font-bold px-4 py-2 rounded-lg disabled:brightness-75'
+                onClick={() => createNewComment(user, commentContent, lastId + 1, setComments)}>
                 SEND
             </button>
         </form>

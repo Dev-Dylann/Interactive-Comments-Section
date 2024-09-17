@@ -1,24 +1,4 @@
-type SetterType = React.Dispatch<React.SetStateAction<{
-    id: number;
-    content: string;
-    createdAt: string;
-    score: number;
-    user: {
-        image: {
-            png: string;
-            webp: string;
-        };
-        username: string;
-    };
-    replies: {
-        id: number;
-        content: string;
-        createdAt: string;
-        score: number;
-        replyingTo: number;
-        user: User;
-    }[];
-}[]>>
+type SetterType = React.Dispatch<React.SetStateAction<FullComment[]>>
 
 const createNewComment = (user: User, commentContent: string, commentId: number, setComments: SetterType) => {
     const newComment = {
@@ -115,7 +95,7 @@ const editComment = (commentId: number, newContent: string, setComments: SetterT
     }
 }
 
-const replyToComment = (user: User, replyContent: string, commentId: number, setComments: SetterType, replyingTo?: number) => {
+const replyToComment = (user: User, replyContent: string, commentId: number, setComments: SetterType, replyingComment: FullComment) => {
     const newReply = {
         id: commentId,
         content: replyContent.trim(),
@@ -123,7 +103,27 @@ const replyToComment = (user: User, replyContent: string, commentId: number, set
         score: 0,
         user: user,
         replies: [],
-        replyingTo: replyingTo
+        replyingTo: replyingComment.id
+    }
+
+    if (!replyingComment.replyingTo) {
+        /* update replies */
+        replyingComment.replies?.push(newReply)
+
+        /* create updated comments state */
+        setComments(prev => {
+            const updatedComments = prev.map(comment => {
+                if (comment.id !== replyingComment?.id) {
+                    return comment
+                } else {
+                    return replyingComment
+                }
+            })
+
+            return updatedComments
+        })
+    } else {
+        console.log('replying to a reply')
     }
 }
 
