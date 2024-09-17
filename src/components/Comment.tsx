@@ -8,7 +8,7 @@ import deleteIcon from "../assets/icons/delete.svg"
 import editIcon from "../assets/icons/edit.svg"
 import ReplySection from "./ReplySection"
 import dateFormatter from "../utils/dateFormatter"
-import { deleteComment } from "../utils/commentUtils"
+import { deleteComment, editComment } from "../utils/commentUtils"
 import { useState } from "react"
 
 type Props = {
@@ -19,6 +19,7 @@ function Comment({ comment }: Props) {
 
     const [isEditing, setIsEditing] = useState(false)
     const [userComment, setUserComment] = useState(comment.content)
+    const [isReplying, setIsReplying] = useState(false)
     const userCommentRef = useRef<HTMLTextAreaElement>(null)
 
     const { user, setComments } = useDataContext()
@@ -46,6 +47,11 @@ function Comment({ comment }: Props) {
         setIsEditing(false)
     }
 
+    const handleEdit = () => {
+        editComment(comment.id, userComment, setComments, comment.replyingTo)
+        setIsEditing(false)
+    }
+
     return (
         <>
             <article className="flex flex-col gap-4 bg-white p-4 rounded-lg">
@@ -66,7 +72,9 @@ function Comment({ comment }: Props) {
                         spellCheck={false}
                         value={userComment}
                         onChange={(e) => setUserComment(e.target.value)}
-                        onBlur={handleCancelEdit}
+                        onBlur={(e) => {
+                            if (!e.relatedTarget || !e.relatedTarget.classList.contains('update-button')) handleCancelEdit()
+                        }}
                         className='transition-all focus:outline-modBlue focus:outline-1 font-rubik text-grayBlue focus:px-4 focus:py-2 bg-white disabled-border-0 disabled:outline-0' />
                 ) : (
                     <pre className="text-grayBlue font-rubik text-wrap">{comment.content}</pre>
@@ -87,7 +95,13 @@ function Comment({ comment }: Props) {
                         {isUser ? (
                             <>
                                 {isEditing ? (
-                                    <button disabled={userComment.trim() === ''} className='px-4 font-bold text-white bg-modBlue rounded-lg disabled:brightness-75'>UPDATE</button>
+                                    <button
+                                        disabled={userComment.trim() === '' || userComment.trim() === comment.content}
+                                        onClick={handleEdit}
+                                        className='px-4 font-bold text-white bg-modBlue rounded-lg disabled:brightness-75 update-button'
+                                    >
+                                        UPDATE
+                                    </button>
                                 ) : (
                                     <>
                                         <button className="text-softRed font-bold flex items-center gap-2" onClick={() => deleteComment(comment.id, setComments, comment.replyingTo)}>

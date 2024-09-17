@@ -1,5 +1,6 @@
 import { useDataContext } from "../context/DataContext"
 import Comment from "./Comment"
+
 function CommentsArea() {
     const { comments } = useDataContext()
 
