@@ -18,6 +18,8 @@ type Props = {
 
 function Comment({ comment }: Props) {
 
+    const [score, setScore] = useState(comment.score)
+
     const [isEditing, setIsEditing] = useState(false)
     const [userComment, setUserComment] = useState(comment.content)
     const [isReplying, setIsReplying] = useState(0)
@@ -104,11 +106,11 @@ function Comment({ comment }: Props) {
 
                 <div className="flex justify-between lg:row-span-full lg:justify-start lg:items-start">
                     <div className='p-2 flex gap-2 bg-lighterGray rounded-lg md:p-4 md:gap-4 lg:flex-col lg:justify-center lg:items-center lg:gap-6 lg:px-2'>
-                        <button className="px-2">
+                        <button onClick={() => setScore(prev => prev + 1)} className="px-2">
                             <img src={plusIcon} alt="Increase Likes" className="md:w-4 md:h-4" />
                         </button>
-                        <span className="text-modBlue font-bold md:text-lg lg:py-1">{comment.score}</span>
-                        <button className="px-2">
+                        <span className="text-modBlue font-bold md:text-lg lg:py-1">{score}</span>
+                        <button disabled={score <= 0} onClick={() => setScore(prev => prev - 1)} className="px-2">
                             <img src={minusIcon} alt="Decrease Likes" className="md:w-4" />
                         </button>
                     </div>
