@@ -26,12 +26,14 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Desktop Screenshot](/public/comments-desktop.jpg)
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
 - Live Site URL: [Live Site](https://devdylan-interactive-comments.netlify.app)
+
+## My process
 
 ### Built with
 
