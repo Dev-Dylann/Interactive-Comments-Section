@@ -106,10 +106,11 @@ const replyToComment = (user: User, replyContent: string, commentId: number, set
         replyingTo: replyingComment.id
     }
 
-    if (!replyingComment.replyingTo) {
-        /* update replies */
-        replyingComment.replies?.push(newReply)
+    /* update replies */
+    replyingComment.replies?.push(newReply)
 
+    if (!replyingComment.replyingTo) {
+        /* if what is being replied to is not a reply of another comment */
         /* create updated comments state */
         setComments(prev => {
             const updatedComments = prev.map(comment => {
@@ -123,7 +124,38 @@ const replyToComment = (user: User, replyContent: string, commentId: number, set
             return updatedComments
         })
     } else {
-        console.log('replying to a reply')
+        /* if what is being replied to is a reply of another comment */
+
+        setComments(prev => {
+            /* find the commemt to which it is a reply of */
+            const originalComment = prev.find(comment => {
+                return comment.id === replyingComment.replyingTo
+            })
+
+            // /* update its replies array */
+            // /* for some reason, its replies array is updated already */
+
+            // const updatedReplies = originalComment?.replies.map(reply => {
+            //     if (reply.id !== replyingComment.id) {
+            //         return reply
+            //     } else {
+            //         return replyingComment
+            //     }
+            // })
+            // originalComment?.replies = updatedReplies
+
+            /* update all comments array */
+            const updatedComments = prev.map(comment => {
+                if (comment.id !== originalComment?.id) {
+                    return comment
+                } else {
+                    return originalComment
+                }
+            })
+
+            return updatedComments
+        })
+
     }
 }
 
