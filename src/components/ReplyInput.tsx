@@ -9,7 +9,7 @@ type Props = {
 
 function ReplyInput({ setIsReplying, replyingComment }: Props) {
 
-    const { user, comments, setComments, lastId } = useDataContext()
+    const { user, setComments, lastId } = useDataContext()
 
     const [replyContent, setReplyContent] = useState('')
 

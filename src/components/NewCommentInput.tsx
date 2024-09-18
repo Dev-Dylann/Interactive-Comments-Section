@@ -4,7 +4,7 @@ import { createNewComment } from "../utils/commentUtils"
 
 function NewCommentInput() {
 
-    const { user, comments, setComments, lastId } = useDataContext()
+    const { user, setComments, lastId } = useDataContext()
 
     const [commentContent, setCommentContent] = useState('')
 
