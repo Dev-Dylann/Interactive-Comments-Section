@@ -10,11 +10,7 @@ This is a solution to the [Interactive comments section challenge on Frontend Me
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -26,31 +22,28 @@ Users should be able to:
 - See hover states for all interactive elements on the page
 - Create, Read, Update, and Delete comments and replies
 - Upvote and downvote comments
-- **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
-- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted.
+- Comments and replies are saved in local storage and persist on page reload
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Desktop Screenshot](/public/comments-desktop.jpg)
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Live Site](https://devdylan-interactive-comments.netlify.app)
+
+## My process
 
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [Tailwind CSS](https://tailwindcss.com/) - CSS library
+- [Vite](https://vitejs.dev) + [React](https://reactjs.org/)
+- [Google Fonts](https://fonts.google.com/)
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Frontend Mentor - [@Dev-Dylann](https://www.frontendmentor.io/profile/Dev-Dylann)
+- Twitter - [@dev_dylann](https://www.twitter.com/dev_dylann)
