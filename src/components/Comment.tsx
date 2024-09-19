@@ -1,16 +1,18 @@
 import { useDataContext } from "../context/DataContext"
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 
 import plusIcon from "../assets/icons/plus.svg"
 import minusIcon from "../assets/icons/minus.svg"
 import replyIcon from "../assets/icons/reply.svg"
 import deleteIcon from "../assets/icons/delete.svg"
 import editIcon from "../assets/icons/edit.svg"
+
 import ReplySection from "./ReplySection"
+import ReplyInput from "./ReplyInput"
+import DeleteModal from "./DeleteModal"
+
 import dateFormatter from "../utils/dateFormatter"
 import { deleteComment, editComment } from "../utils/commentUtils"
-import { useState } from "react"
-import ReplyInput from "./ReplyInput"
 
 type Props = {
     comment: FullComment
@@ -23,6 +25,7 @@ function Comment({ comment }: Props) {
     const [isEditing, setIsEditing] = useState(false)
     const [userComment, setUserComment] = useState(comment.content)
     const [isReplying, setIsReplying] = useState(0)
+    const [isDeleting, setIsDeleting] = useState(false)
     const userCommentRef = useRef<HTMLTextAreaElement>(null)
 
     const { user, setComments } = useDataContext()
@@ -70,7 +73,7 @@ function Comment({ comment }: Props) {
                     <div className='hidden lg:flex grow justify-end gap-8'>
                         {isUser ? (
                             <>
-                                <button disabled={isEditing} className="text-softRed font-bold flex items-center gap-2 text-lg disabled:brightness-150 lg:hover:brightness-150" onClick={() => deleteComment(comment.id, setComments, comment.replyingTo)}>
+                                <button disabled={isEditing} className="text-softRed font-bold flex items-center gap-2 text-lg disabled:brightness-150 lg:hover:brightness-150" onClick={() => setIsDeleting(true)}>
                                     <img src={deleteIcon} alt="Delete Icon" className="w-4 h-4" />
                                     Delete
                                 </button>
@@ -128,7 +131,7 @@ function Comment({ comment }: Props) {
                                     </button>
                                 ) : (
                                     <>
-                                        <button className="text-softRed font-bold flex items-center gap-2 md:text-lg" onClick={() => deleteComment(comment.id, setComments, comment.replyingTo)}>
+                                        <button className="text-softRed font-bold flex items-center gap-2 md:text-lg" onClick={() => setIsDeleting(true)}>
                                             <img src={deleteIcon} alt="Delete Icon" className="md:w-4 md:h-4" />
                                             Delete
                                         </button>
@@ -167,6 +170,8 @@ function Comment({ comment }: Props) {
 
             {/* Input field to make replies */}
             {isReplying > 0 && <ReplyInput setIsReplying={setIsReplying} replyingComment={comment} />}
+
+            {isDeleting && <DeleteModal setIsDeleting={setIsDeleting} commentId={comment.id} replyingTo={comment.replyingTo} />}
         </>
 
     )
