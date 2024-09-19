@@ -11,8 +11,8 @@ function DeleteModal({ setIsDeleting, commentId, replyingTo }: Props) {
     const { setComments } = useDataContext()
 
     return (
-        <aside className='fixed h-full w-full z-10 top-0 left-0 bg-black/40 flex items-center justify-center px-4 md:text-lg md:px-8'>
-            <section className='bg-white p-4 w-full rounded-lg flex flex-col gap-4 md:p-8 max-w-lg'>
+        <aside className='animate-[fadeIn_125ms_ease-in_forwards] opacity-0 fixed h-full w-full z-10 top-0 left-0 bg-black/40 flex items-center justify-center px-4 md:text-lg md:px-8'>
+            <section className='animate-[scaleUp_125ms_ease-in_forwards] scale-75 bg-white p-4 w-full rounded-lg flex flex-col gap-4 md:p-8 max-w-lg'>
                 <h2 className='font-bold text-darkBlue text-xl md:text-2xl'>Delete Comment</h2>
 
                 <p className='text-grayBlue md:text-lg'>Are you sure you want to delete this comment? This will remove the comment and cannot be undone.</p>

@@ -12,7 +12,7 @@ import ReplyInput from "./ReplyInput"
 import DeleteModal from "./DeleteModal"
 
 import dateFormatter from "../utils/dateFormatter"
-import { deleteComment, editComment } from "../utils/commentUtils"
+import { editComment } from "../utils/commentUtils"
 
 type Props = {
     comment: FullComment

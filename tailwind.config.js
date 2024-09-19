@@ -16,6 +16,14 @@ export default {
       fontFamily: {
         rubik: ["Rubik", "sans"],
       },
+      keyframes: {
+        fadeIn: {
+          "100%": { opacity: 1 },
+        },
+        scaleUp: {
+          "100%": { transform: "scale(1)" },
+        },
+      },
     },
   },
   plugins: [],
