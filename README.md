@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Solution](https://your-solution-url.com)
 - Live Site URL: [Live Site](https://devdylan-interactive-comments.netlify.app)
 
 ## My process
